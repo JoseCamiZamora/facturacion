@@ -137,9 +137,9 @@
               <tr>
                 <th scope="col" class="th-gris text-center" style="width: 100px;" >No. Factura</th>
                 <th scope="col" class="th-gris text-center " style="width: 100px;"  >Mes Facturado</th>
-                <th scope="col" class="th-gris" style="width: 30px;"  >Mz</th>
-                <th scope="col" class="th-gris" style="width: 30px;">Casa</th>
-                <th scope="col" class="th-gris" style="width: 30px;" >Apto</th>
+                <th scope="col" class="th-gris" style="width: 50px;"  >Mz</th>
+                <th scope="col" class="th-gris" style="width: 50px;">Casa</th>
+                <th scope="col" class="th-gris" style="width: 100px;">Dirección</th>
                 <th scope="col" class="th-gris">Propietario</th>
                 <th scope="col" class="th-gris" style="width: 60px;" >Estado</th>
                 <th scope="col" class="th-gris text-center " style="width: 80px;">Ver</th>
@@ -161,8 +161,8 @@
                   <td  class="   text-center">
                     {{ $factura->casa }}
                   </td>
-                  <td  class="   text-center">
-                    {{ $factura->apto }}
+                   <td class='text-left'>
+                   {{ $factura->direccion }}
                   </td>
                   <td class='text-left'>
                    {{ $factura->propietario }}

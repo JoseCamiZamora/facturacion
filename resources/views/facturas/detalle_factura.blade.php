@@ -237,12 +237,12 @@
          		<td colspan="4" >
               <table width="100%;" style="border:none;" >
                 <tr>
-                  <td><img  src="{{ asset('assets/img/logo1.png') }}" style="width:80px;"/></td>
+                  <td><img  src="{{ asset('assets/img/logo2.png') }}" style="width:100px;"/></td>
                   <td> 
-                    <h5 style="margin-bottom: .05rem;">BARRIO LAS BRISAS</h5>
-                    <p class="p-subtitulo">JUNTA ADMINISTRADORA DEL ACUEDUCTO</p> 
+                    <h5 style="margin-bottom: .05rem;">TERRAZAS DEL NORTE ETAPA I</h5>
+                    <p class="p-subtitulo">JUNTA DE ACCION COMUNAL</p> 
                  </td>
-                    <td><img  src="{{ asset('assets/img/logo2.png') }}" style="width:80px;" /></td>
+                    <td><img  src="{{ asset('assets/img/logo2.png') }}" style="width:100px;" /></td>
                 </tr>
               </table>
                
@@ -268,15 +268,13 @@
          	</tr>
          	<tr class="text-center">
          		<td class="td-color-azul" style="width: 350px;">DIRECCIÓN </td>
-         		<td class="td-color-azul" >MZ</td>
-         		<td class="td-color-azul" >CASA</td>
-         		<td class="td-color-azul" >APTO</td>
+         		<td class="td-color-azul" colspan="1" >MZ</td>
+         		<td class="td-color-azul" colspan="3" >CASA</td>
          	</tr>
          	<tr class="text-center">
          		<td class="td-color-blanco" >{{ $factura->direccion }}</td>
-         		<td class="td-color-blanco" >{{$factura->mz}}</td>
-         		<td class="td-color-blanco" >{{$factura->casa}}</td>
-         		<td class="td-color-blanco"  >{{$factura->apto}}</td>
+         		<td class="td-color-blanco" colspan="1" >{{$factura->mz}}</td>
+         		<td class="td-color-blanco"  colspan="3">{{$factura->casa}}</td>
          	</tr>
          	 	<tr class="text-center">
          		<td class="td-color-blanco" >NOMBRE:</td>
@@ -381,7 +379,7 @@
 
 
           <tr >
-            <td class="text-left td-conceptos" >VALOR LECTURA MES</td>
+            <td class="text-left td-conceptos" >VALOR VIGILANCIA MES</td>
             <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->valor_mes, 0)}}</td>
           
           </tr>
