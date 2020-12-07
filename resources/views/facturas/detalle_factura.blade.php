@@ -7,79 +7,57 @@
 <div class="main-content-container container-fluid px-4 pb-4">
      <!-- Page Header -->
 	<div class='container'>
-
 		  <div class="page-header row no-gutters py-4">
 		    <div class="col">
 		      <span class="page-subtitle">Modulo Facturas</span>
-		  
 		        <h4 class="page-title" >Detalle de la factura <b>{{ $factura->numero }}</b> <span style='font-size: 0.6em;'></span> </h4>
-
-    @if(Auth::user()->rol==1)
-              
-		     
-         @if($seccion==0)
-		       <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-		        Atrás
-		        <a href="{{ url('/facturas/listado_facturas/'.$aniosel.'/'.$messel.'') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-		      </div>
-         @endif
-
-         @if($seccion==1)
-           <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-            Atrás
-            <a href="{{ url('cuentas/lista_factura_cuenta/'.$factura->id_cuenta) }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-          </div>
-         @endif
-
-          @if($seccion==2)
-           <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-            Atrás
-            <a href="{{ url('recaudo/listado_facturas') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-          </div>
-         @endif
-
-          @if($seccion==3)
-           <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-            Atrás
-            <a href="{{ url('informes/listado_informes') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-          </div>
+           @if(Auth::user()->rol==1)
+           @if($seccion==0)
+  		       <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+  		        Atrás
+  		        <a href="{{ url('/facturas/listado_facturas/'.$aniosel.'/'.$messel.'') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+  		      </div>
+           @endif
+           @if($seccion==1)
+             <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+              Atrás
+              <a href="{{ url('cuentas/lista_factura_cuenta/'.$factura->id_cuenta) }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+            </div>
+           @endif
+            @if($seccion==2)
+             <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+              Atrás
+              <a href="{{ url('recaudo/listado_facturas') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+            </div>
+           @endif
+            @if($seccion==3)
+             <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+              Atrás
+              <a href="{{ url('informes/listado_informes') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+            </div>
+            @endif
+            @if($seccion==4)
+              <?php  
+                  $urlprevious = url()->previous(); 
+                  $newurl='informes/listado_facturas_bancos';
+                  if (strpos($urlprevious, 'listado_facturas_bancos') !== false) {
+                    $newurl=$urlprevious;     
+                  }
+                ?>
+               <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+                Atrás
+                <a href="{{ url($newurl) }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+              </div>
+              @endif
           @endif
-
-
-        @if($seccion==4)
-
-          <?php  
-                    $urlprevious = url()->previous(); 
-                    $newurl='informes/listado_facturas_bancos';
-                    if (strpos($urlprevious, 'listado_facturas_bancos') !== false) {
-                      
-                      $newurl=$urlprevious;     
-                    }
-            ?>
-
-           <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-            Atrás
-            <a href="{{ url($newurl) }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-          </div>
+          @if(Auth::user()->rol==2)
+              <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
+                Atrás
+                <a href="{{ url('/recaudo/listado_facturas') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
+              </div>
           @endif
-
-      @endif
-
-      @if(Auth::user()->rol==2)
-          <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
-            Atrás
-            <a href="{{ url('/recaudo/listado_facturas') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
-          </div>
-
-
-      @endif
-
-
-
-
 		    </div>
 		  </div>
-
 
     <?php $mesesarray=["","Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]; ?>
 
@@ -362,25 +340,26 @@
           <tr >
             <td class="text-left td-conceptos" >SALDO ANTERIOR</td>
             @if($factura->saldo_anterior > 0)
-             <td class="text-center td-color-blanco"><a href="javascript:void(0);" onclick="detallefactaurasAnteriores({{$factura->id}})">{{number_format($factura->saldo_anterior, 0)}}</a></td>
+             <td class="text-center td-color-blanco" colspan="3"><a href="javascript:void(0);" onclick="detallefactaurasAnteriores({{$factura->id}})">{{number_format($factura->saldo_anterior, 0)}}</a></td>
             @else
              <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->saldo_anterior, 0)}}</td>
             @endif
-           
-           
           </tr>
-
           <tr >
             <td class="text-left td-conceptos" >MORA</td>
             <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->mora, 0)}}</td>
-          
           </tr>
-
-
-
           <tr >
             <td class="text-left td-conceptos" >VALOR VIGILANCIA MES</td>
             <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->valor_mes, 0)}}</td>
+          </tr>
+            <tr >
+            <td class="text-left td-conceptos" >VALOR CUOTA JAC MES</td>
+            <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->valor_jac, 0)}}</td>
+          </tr>
+            <tr >
+            <td class="text-left td-conceptos" >VALOR POR VEHICULO</td>
+            <td class="text-center td-color-blanco" colspan="3">{{number_format($factura->valor_vehiculos, 0)}}</td>
           
           </tr>
 
@@ -416,8 +395,7 @@
          	</tr>
          	<tr class="text-left">
          		<td colspan="4">
-         			<p>Esta factura presta merito ejecutivo, según articulo 77 de comercio
-         		    El mal uso del agua será sancionado según estatutos aprobados</p>
+         			<p>Esta factura presta merito ejecutivo, según articulo 77 de comercio</p>
          		</td>
          	</tr>
          	<tr class="text-left">

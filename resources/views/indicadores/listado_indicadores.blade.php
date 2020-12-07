@@ -1,20 +1,14 @@
 @extends('layouts.app')
 
-
-
 @section('content')
 
 <div class="main-content-container container-fluid px-4 pb-4">
      <!-- Page Header -->
   <div class='container'>
-
-
   	<div class="page-header row no-gutters py-4">
     <div class="col">
       <span class="page-subtitle">Modulo indicadores  </span>
-  
         <h4 class="page-title" >Indicadores Graficos   <span style='font-size: 0.6em;'></span> </h4>
-     
        <div  class=" ml-auto" style="text-align: right; margin-top: -35px;">
         Atrás
         <a href="{{ url('home') }}" class="mb-2 btn btn-sm  mr-1 btn-redondo-suave text-primary" title="salir a menu" ><i class="fa fa-chevron-left" aria-hidden="true"></i> </a>
@@ -122,7 +116,6 @@
     <h3 class=" page-title">Indicador de Cargos</h3>
       <tr><td style='width:20%' style="background-color: white; vertical-align: middle;" ><strong>
   </table>
-
   <div class="row" style="margin-top:20px;">
        <div  class="col-md-12"  style="background-color: white;margin-left: 10px; margin-right:  10px;">
         <br>
@@ -148,38 +141,6 @@
                 <td style="text-align: right;">${{number_format($cargosNoPagadas['multasno'], 0)}}</td>
               </tr>
                <tr>
-                <th scope="row" style="text-align: center">2</th>
-                <td style="text-align: left;">Temdemcia M</td>
-                 <td>{{$cargos['cant_tendenciaP']}}</td>
-                <td style="text-align: right;">${{number_format($cargos['tendencia'], 0)}}</td>
-                <td>{{$cargosNoPagadas['cant_tendenciaPno']}}</td>
-                <td style="text-align: right;">${{number_format($cargosNoPagadas['tendenciano'], 0)}}</td>
-              </tr>
-               <tr>
-                <th scope="row" style="text-align: center">3</th>
-                <td style="text-align: left;" >LLaves y Accesorios</td>
-                 <td>{{$cargos['cant_llavesP']}}</td>
-                <td style="text-align: right;">${{number_format($cargos['llavesaccesorios'], 0)}}</td>
-                <td>{{$cargosNoPagadas['cant_llavesPno']}}</td>
-                <td style="text-align: right;">${{number_format($cargosNoPagadas['llavesaccesoriosno'], 0)}}</td>
-              </tr>
-               <tr>
-                <th scope="row" style="text-align: center">4</th>
-                <td style="text-align: left;" >Tanques</td>
-                 <td>{{$cargos['cant_tanqueP']}}</td>
-                <td style="text-align: right;">${{number_format($cargos['tanque'], 0)}}</td>
-                <td>{{$cargosNoPagadas['cant_tanquePno']}}</td>
-                <td style="text-align: right;">${{number_format($cargosNoPagadas['tanqueno'], 0)}}</td>
-              </tr>
-               <tr>
-                <th scope="row" style="text-align: center">5</th>
-                <td style="text-align: left;">Recargos</td>
-                 <td>{{$cargos['cant_recargosP']}}</td>
-                <td style="text-align: right;">${{number_format($cargos['recargos'], 0)}}</td>
-                <td>{{$cargosNoPagadas['cant_recargosPno']}}</td>
-                <td style="text-align: right;">${{number_format($cargosNoPagadas['recargosno'], 0)}}</td>
-              </tr>
-               <tr>
                 <th scope="row" style="text-align: center">6</th>
                 <td style="text-align: left;">Otros</td>
                  <td>{{$cargos['cant_otrosP']}}</td>
@@ -194,7 +155,6 @@
   </div>
   <br><br>
   <div class="row" style="margin-top:10px; text-align: center;">
-    
      <div  class="col-md-3"  style="background-color: white; margin-left: 180px; margin-right: : 10px; padding-top: 20px;" >
       <h4 class="page-title" >Multas <span style='font-size: 0.6em;'></span> </h4>
           <div id="canvas-holder" >
@@ -210,64 +170,6 @@
           </div>
       </div>
        <div  class="col-md-3"  style="background-color: white; margin-left: 10px; margin-right: : 10px; padding-top: 20px;" >
-         <h4 class="page-title" >Tendencia M <span style='font-size: 0.6em;'></span> </h4>
-          <div id="canvas-holder" >
-              <div class="chartjs-size-monitor">
-              <div class="chartjs-size-monitor-expand">
-                <div class=""></div>
-              </div>
-              <div class="chartjs-size-monitor-shrink">
-                <div class=""></div>
-              </div>
-              </div>
-              <canvas id="chart-area-tendencia" style="display: block; width: 540px; height: 270px;margin-top:10px;" width="540" height="270" class="chartjs-render-monitor"></canvas>
-          </div>
-      </div>
-       <div  class="col-md-3"  style="background-color: white; margin-left: 10px; margin-right: : 10px; padding-top: 20px;" >
-        <h4 class="page-title" >Llaves y Accesorios<span style='font-size: 0.6em;'></span> </h4>
-          <div id="canvas-holder" >
-              <div class="chartjs-size-monitor">
-              <div class="chartjs-size-monitor-expand">
-                <div class=""></div>
-              </div>
-              <div class="chartjs-size-monitor-shrink">
-                <div class=""></div>
-              </div>
-              </div>
-              <canvas id="chart-area-llaves" style="display: block; width: 540px; height: 270px;margin-top:10px;" width="540" height="270" class="chartjs-render-monitor"></canvas>
-          </div>
-      </div>
-  </div>
-  <div class="row" style="margin-top:20px; text-align: center;">
-    <div  class="col-md-3"  style="background-color: white; margin-left: 180px; margin-right: : 10px; padding-top: 20px;" >
-      <h4 class="page-title" >Tanques<span style='font-size: 0.6em;'></span> </h4>
-        <div id="canvas-holder" >
-            <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand">
-              <div class=""></div>
-            </div>
-            <div class="chartjs-size-monitor-shrink">
-              <div class=""></div>
-            </div>
-            </div>
-            <canvas id="chart-area-tanque" style="display: block; width: 540px; height: 270px;margin-top:10px;" width="540" height="270" class="chartjs-render-monitor"></canvas>
-        </div>
-    </div>
-     <div  class="col-md-3"  style="background-color: white; margin-left: 10px; margin-right: : 10px; padding-top: 20px;" >
-      <h4 class="page-title" >Recargos<span style='font-size: 0.6em;'></span> </h4>
-        <div id="canvas-holder" >
-            <div class="chartjs-size-monitor">
-            <div class="chartjs-size-monitor-expand">
-              <div class=""></div>
-            </div>
-            <div class="chartjs-size-monitor-shrink">
-              <div class=""></div>
-            </div>
-            </div>
-            <canvas id="chart-area-recargos" style="display: block; width: 540px; height: 270px;margin-top:10px;" width="540" height="270" class="chartjs-render-monitor"></canvas>
-        </div>
-    </div>
-    <div  class="col-md-3"  style="background-color: white; margin-left: 10px; margin-right: : 10px; padding-top: 20px;" >
       <h4 class="page-title" >Otros<span style='font-size: 0.6em;'></span> </h4>
         <div id="canvas-holder" >
             <div class="chartjs-size-monitor">
@@ -282,22 +184,15 @@
         </div>
     </div>
   </div>
-
 </div>
 <script type="text/javascript">
   console.log("llego aqui");
   document.addEventListener("DOMContentLoaded", function(event) { 
     IND_renderizar_indicador1({{$facpagadas}},{{$facnopagadas}},{{$facabonos}});
     IND_renderizar_cargo_multa({{$cargos['cant_multasP']}},{{$cargosNoPagadas['cant_multasPno']}});
-    IND_renderizar_cargo_tendencia({{$cargos['cant_tendenciaP']}},{{$cargosNoPagadas['cant_tendenciaPno']}});
-    IND_renderizar_cargo_llavesaccesorios({{$cargos['cant_llavesP']}},{{$cargosNoPagadas['cant_llavesPno']}});
-    IND_renderizar_cargo_tanque({{$cargos['cant_tanqueP']}},{{$cargosNoPagadas['tanqueno']}});
-    IND_renderizar_cargo_recargos({{$cargos['cant_recargosP']}},{{$cargosNoPagadas['recargosno']}});
     IND_renderizar_cargo_otros({{$cargos['cant_otrosP']}},{{$cargosNoPagadas['cant_otrosPno']}});
     //do work
   });
-
-  
 </script>
 @endsection
 

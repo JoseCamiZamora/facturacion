@@ -104,14 +104,12 @@ class IndicadoresController extends Controller
           $promedioPagadas = round($facturasPagadas*100/$totalFacturas,2);
           $promedioNoPagadas = round($facturasNoPagadas*100/$totalFacturas,2);
           $promedioAbonos = round($facturasAbonos*100/$totalFacturas,2);
-
         }else{
           $totalFacturas = $facturasPagadas +  $facturasNoPagadas;
           $promedioPagadas = 0;
           $promedioNoPagadas = 100;
           $promedioAbonos = 0;
         }
-
         $recordarray=array(
           'facturasPagadas'=>$facturasPagadas,
           'facturasNoPagadas'=>$facturasNoPagadas,
@@ -120,9 +118,7 @@ class IndicadoresController extends Controller
           'promedioNoPagadas'=>$promedioNoPagadas,
           'promedioAbonos' =>  $promedioAbonos
         );
-      
       return  $recordarray;
-
     }
     public function cargosFactura($aniosel=null,$messel=null){
 
@@ -131,17 +127,9 @@ class IndicadoresController extends Controller
                                                     ->where("estado","=",1 )
                                                     ->get();                                                       
        $valorMultas = 0;
-       $tendenciaM = 0;
-       $llavesyaccesorios = 0;
-       $tanque = 0;
-       $recargos = 0;
        $otros = 0;
 
        $cant_multasP = 0;
-       $cant_tendenciaP = 0;
-       $cant_llavesP = 0;
-       $cant_tanqueP = 0;
-       $cant_recargosP = 0;
        $cant_otrosP = 0;
 
        foreach($facturas as $fac){
@@ -157,31 +145,7 @@ class IndicadoresController extends Controller
                if($cargo->valor_default > 0){
                   $cant_multasP ++;
                }
-            }
-             if($cargo->id ==2){
-               $tendenciaM += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_tendenciaP ++;
-               }
-            }
-             if($cargo->id ==3){
-               $llavesyaccesorios += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_llavesP ++;
-               }
-            }
-             if($cargo->id ==4){
-               $tanque += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_tanqueP ++;
-               }
-              
-            } if($cargo->id ==5){
-               $recargos += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_recargosP ++;
-               }
-            }
+            } 
              if($cargo->id ==6){
                $otros += $cargo->valor_default;
                if($cargo->valor_default > 0){
@@ -193,16 +157,8 @@ class IndicadoresController extends Controller
 
         $recordarray=array(
           'multas'=>$valorMultas,
-          'tendencia'=>$tendenciaM,
-          'llavesaccesorios'=>$llavesyaccesorios,
-          'tanque'=>$tanque,
-          'recargos'=>$recargos,
           'otros'=>$otros,
           'cant_multasP'=> $cant_multasP,
-          'cant_tendenciaP'=> $cant_tendenciaP,
-          'cant_llavesP'=> $cant_llavesP,
-          'cant_tanqueP'=> $cant_tanqueP,
-          'cant_recargosP'=> $cant_recargosP,
           'cant_otrosP'=> $cant_otrosP
         );
 
@@ -214,17 +170,9 @@ class IndicadoresController extends Controller
        $facturas=Factura::where("anio","=",$aniosel )->where("mes","=",$messel )->where("estado","=",0 )
                                       ->get();
        $valorMultas = 0;
-       $tendenciaM = 0;
-       $llavesyaccesorios = 0;
-       $tanque = 0;
-       $recargos = 0;
        $otros = 0;
 
        $cant_multasP = 0;
-       $cant_tendenciaP = 0;
-       $cant_llavesP = 0;
-       $cant_tanqueP = 0;
-       $cant_recargosP = 0;
        $cant_otrosP = 0;
 
        foreach($facturas as $fac){
@@ -239,30 +187,6 @@ class IndicadoresController extends Controller
                $valorMultas += $cargo->valor_default;
                if($cargo->valor_default > 0){
                   $cant_multasP ++;
-               }
-            }
-             if($cargo->id ==2){
-               $tendenciaM += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_tendenciaP ++;
-               }
-            }
-             if($cargo->id ==3){
-               $llavesyaccesorios += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_llavesP ++;
-               }
-            }
-             if($cargo->id ==4){
-               $tanque += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_tanqueP ++;
-               }
-              
-            } if($cargo->id ==5){
-               $recargos += $cargo->valor_default;
-               if($cargo->valor_default > 0){
-                  $cant_recargosP ++;
                }
             }
              if($cargo->id ==6){
@@ -275,18 +199,9 @@ class IndicadoresController extends Controller
        }
         $recordarray=array(
           'multasno'=>$valorMultas,
-          'tendenciano'=>$tendenciaM,
-          'llavesaccesoriosno'=>$llavesyaccesorios,
-          'tanqueno'=>$tanque,
-          'recargosno'=>$recargos,
           'otrosno'=>$otros,
           'cant_multasPno'=> $cant_multasP,
-          'cant_tendenciaPno'=> $cant_tendenciaP,
-          'cant_llavesPno'=> $cant_llavesP,
-          'cant_tanquePno'=> $cant_tanqueP,
-          'cant_recargosPno'=> $cant_recargosP,
           'cant_otrosPno'=> $cant_otrosP
-
         );
        return $recordarray;
      }

@@ -307,15 +307,8 @@ class FacturasController extends Controller
           $factura->total_cargos= $totalcargos;
         }
       }
-
-
-      
-    
       //return dd("factura sel", $list_fac);
       return view("facturas.form_detalle_facturas_anteriores")->with('facturas',$list_fac)->with("facturasel",      $facturareal);
-
-
-
     }
 
     public function detalle_factura($id_factura,$seccion=0){
@@ -466,15 +459,18 @@ class FacturasController extends Controller
       $cargos=Cargos::where("estado","=", 1 )->get();
       $cargosMora=CargosMora::where("estado","=", 1)->get();
       $valores= Valores::all();
-      $arrayvalores=array();
-      $valMes = 0;
+      $valcuotaMes = 0;
+      $valCuotaJac = 0;
+      $valCuotaVehiculos =0;
+      $valCuotaVehiculosMes =0;
      
       if($valores){
-         foreach($valores as $valor){
+          foreach($valores as $valor){
               $idval=$valor->id;
-              $valMes+=$valor->valor_default;
-              $arrayvalores[$idval]=$valor->valor_default;
-         }
+              if($valor->id == 1){ $valcuotaMes = $valor->valor_default;}
+              if($valor->id == 2){ $valCuotaJac = $valor->valor_default;}
+              if($valor->id == 3){ $valCuotaVehiculos = $valor->valor_default;}
+          }
       }
        $totalcargos=0;
       if($cargos){
@@ -494,10 +490,21 @@ class FacturasController extends Controller
 
           $cuentas=Cuentas::where("estado","=", "A")->where("congelada","=",0)->get();
           foreach ( $cuentas as  $cuenta) {
+
+            $cuenta->vehiculos_json= $cuenta->vehiculos_json?$cuenta->vehiculos_json:'[]';
+            $cuentavehiculos=json_decode($cuenta->vehiculos_json);
+
+            if($cuentavehiculos){
+              $cantidad = count($cuentavehiculos);
+              $valCuotaVehiculosMes = $cantidad * $valCuotaVehiculos;
+            }else{
+              $valCuotaVehiculosMes = 0;
+            }
+
             $totalFactura=0;
             $saldoanterior=0;
             $abono=0;
-            $valormes=$valMes?$valMes:0;
+            $valormes=$valcuotaMes?$valcuotaMes:0;
             $id_cuenta=$cuenta->id?$cuenta->id:0;
             $estrato=$cuenta->estrato?$cuenta->estrato:'sin definir';
             $mz=$cuenta->mz?$cuenta->mz:'-';
@@ -518,14 +525,11 @@ class FacturasController extends Controller
               
               if($facturasant){
                 $subtotal=0;      
-
                 foreach($cargosMora as $cargom){
                     if($cargom->tipo_factura==$cuenta->tipo_factura){  
                         $valormora=$cargom->valor_default?$cargom->valor_default:0;
-                      
                      }
                 }   
-
                 foreach($facturasant as $facant){
                   if($facant->saldada == 0){
                     $saldoanterior=$saldoanterior+$this->saldo_anterior($facant);
@@ -534,19 +538,11 @@ class FacturasController extends Controller
                     array_push($idesfacturas,$facant->id);
                   }
                 }
-
-
               }
-
-      
               $cantmora=count($idesfacturas);
               $totalmora=$valormora*$cantmora;
-
-
               $saldoanterior=$saldoanterior;
-
-              $totalFactura=$saldoanterior+$valormes+$totalcargos;
-
+              $totalFactura=$saldoanterior+$valormes+$valCuotaJac+$valCuotaVehiculosMes+$totalcargos;
 
               $recordarray=array('id_cuenta'=>$id_cuenta, 
               'estrato'=>$estrato, 
@@ -559,6 +555,8 @@ class FacturasController extends Controller
               'mes'=>$messel,
               'estado'=>$estado,
               'valor_mes'=>$valormes,
+              'valor_jac'=>$valCuotaJac,
+              'valor_vehiculos'=>$valCuotaVehiculosMes,
               'facturas_anteriores'=> json_encode($idesfacturas),
               'saldo_anterior'=>$saldoanterior,
               'cargos'=>json_encode($cargos),
@@ -726,7 +724,7 @@ class FacturasController extends Controller
       
       $factura->cargos=json_encode($newcargos);
 
-      $factura->valor_total=$factura->saldo_anterior + $factura->valor_mes +  $totalcargos;
+      $factura->valor_total=$factura->saldo_anterior + $factura->valor_mes + $factura->valor_jac + $factura->valor_vehiculos + $totalcargos;
       
       if( $factura->save())
       {
